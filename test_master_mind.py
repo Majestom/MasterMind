@@ -28,3 +28,19 @@ def test_request_user_input(capsys):
     request_user_input()
     output = capsys.readouterr()
     assert output.out == "Please enter a guess:\n"
+
+def test_validate_user_input(capsys):
+    assert validate_user_input("r") == "Invalid!"
+    output = capsys.readouterr()
+    assert output.out == "You need to enter 5 distinct elements separated by spaces, not 1.\n"
+    assert validate_user_input("ww w w w w") == "Invalid!"
+    output = capsys.readouterr()
+    assert output.out == "Input needs to be 9 characters long, not 10.\n"
+    assert validate_user_input("z z z z z") == "Invalid!"
+    output = capsys.readouterr()
+    assert output.out == "z is not in set dict_keys(['r', 'y', 'b', 'g', 'c', 'p', 'o', 'w']).\n"
+
+def test_check_decoding_board_against_user_guess():
+    a_decoding_board = ["r","r","r","r","r"]
+    a_current_user_board = [["b","b","b","b","b"],["r","b","b","b","b","b"]]
+    assert check_decoding_board_against_user_guess(a_decoding_board,a_current_user_board) == ["black"]
