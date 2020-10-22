@@ -42,5 +42,14 @@ def test_validate_user_input(capsys):
 
 def test_check_decoding_board_against_user_guess():
     a_decoding_board = ["r","r","r","r","r"]
-    a_current_user_board = [["b","b","b","b","b"],["r","b","b","b","b","b"]]
-    assert check_decoding_board_against_user_guess(a_decoding_board,a_current_user_board) == ["black"]
+    a_current_user_board = [["b","b","b","b","b"],["r","b","b","b","b"]]
+    assert check_decoding_board_against_user_guess(a_decoding_board, a_current_user_board) == (["black"],[])
+    a_decoding_board = ["g","b","y","r","y"]
+    a_current_user_board = [["b","b","b","b","b"],["y","w","w","w","w"]]
+    assert check_decoding_board_against_user_guess(a_decoding_board, a_current_user_board) == ([],["white"])
+    a_decoding_board = ["r","b","b","b","b"]
+    a_current_user_board = [["g","r","g","g","g"]]
+    assert check_decoding_board_against_user_guess(a_decoding_board, a_current_user_board) == ([],["white"])
+    a_decoding_board = ["r","b","r","c","o"]
+    a_current_user_board = [["r","r","g","g","g"]]
+    assert check_decoding_board_against_user_guess(a_decoding_board, a_current_user_board) == (["black"],["white"])    

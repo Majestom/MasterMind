@@ -64,12 +64,25 @@ def validate_user_input(input_string):
     return input_string
 
 def check_decoding_board_against_user_guess(decoding_board, current_user_board):
-    answer_list = []
+    black_answer_list = []
+    white_answer_list = []
+    position_of_colours_found = []
     i=0
+    # Assign the black pegs.
     for i in range(len(decoding_board)):
         if decoding_board[i] == current_user_board[-1][i]:
-            answer_list.append("black")
-    return answer_list
+            black_answer_list.append("black")
+            position_of_colours_found.append(i)
+    j=0
+    k=0
+    # Assign the white pegs.
+    for j in range(len(decoding_board)):
+        for k in range(len(current_user_board[-1])):
+            if decoding_board[j] == current_user_board[-1][k] and k != j and j not in position_of_colours_found and k not in position_of_colours_found:
+                white_answer_list.append("white")
+                position_of_colours_found.append(j)
+                position_of_colours_found.append(k)
+    return black_answer_list, white_answer_list
 
 
 def start():
@@ -78,7 +91,7 @@ def start():
     user_input = ""
     while user_input != "q":
         display_user_board(current_user_board)
-        print(decoding_board_content)
+        print("Hint: " + str(decoding_board_content))
         request_user_input()
         user_input = input()
         if user_input == "q":
@@ -86,14 +99,15 @@ def start():
         validated_user_input = validate_user_input(user_input)
         if validated_user_input != "Invalid!":
             current_user_board = add_to_user_board(current_user_board, validated_user_input)
-        answer_list = check_decoding_board_against_user_guess(decoding_board_content, current_user_board[-1])
-        # print("answer_list is " + str(answer_list))
-        print(str(answer_list))
-        print("current_user_board[-1] is " + str(current_user_board[-1]))
-        if decoding_board_content == current_user_board[-1]:
-            print("You win!")
-            break
-        print(answer_list)
+            black_answer_list, white_answer_list = check_decoding_board_against_user_guess(decoding_board_content, current_user_board)
+            if decoding_board_content == current_user_board[-1]:
+                print(black_answer_list)
+                print("You win!")
+                break
+            print(black_answer_list)
+            print(white_answer_list)
+        else:
+            pass
 
 
 # start()
