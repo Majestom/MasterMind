@@ -21,28 +21,26 @@ def create_user_board():
     user_board = [["_","_","_","_","_"]]
     return user_board
 
+# Adds a suitably formatted input string to the user_board.
 def add_to_user_board(user_board, input_string):
     new_guess_row = input_string.split(" ")
-    # print(new_guess_row)
     if user_board == [["_","_","_","_","_"]]:
         user_board[0] = new_guess_row
     else:
-        # user_board = user_board.append(new_guess_row)
         user_board.append(new_guess_row)
-    # user_board.append(new_guess_row)
     return user_board
 
+# Prints user board.
 def display_user_board(a_user_board):
     for e in a_user_board:
         print(e)
-    # print(a_user_board)
 
+# Asks user for input.
 def request_user_input():
     print("Please enter a guess:")
     return
-    # input_string = input()
 
-
+# Checks that user input is valid.
 def validate_user_input(input_string):
     new_guess_row = input_string.split(" ")
 
@@ -63,6 +61,7 @@ def validate_user_input(input_string):
                 return "Invalid!"
     return input_string
 
+# Assigns answer pegs for user's guess.
 def check_decoding_board_against_user_guess(decoding_board, current_user_board):
     black_answer_list = []
     white_answer_list = []
@@ -84,6 +83,8 @@ def check_decoding_board_against_user_guess(decoding_board, current_user_board):
                 position_of_colours_found.append(k)
     return black_answer_list, white_answer_list
 
+def offer_hint(decoding_board_content):
+    print("Hint: " + str(decoding_board_content))
 
 def start():
     decoding_board_content = generate_decoding_board_content()
@@ -91,11 +92,12 @@ def start():
     user_input = ""
     while user_input != "q":
         display_user_board(current_user_board)
-        print("Hint: " + str(decoding_board_content))
         request_user_input()
         user_input = input()
         if user_input == "q":
             break
+        if user_input == "h":
+            offer_hint(decoding_board_content)
         validated_user_input = validate_user_input(user_input)
         if validated_user_input != "Invalid!":
             current_user_board = add_to_user_board(current_user_board, validated_user_input)
@@ -110,4 +112,4 @@ def start():
             pass
 
 
-# start()
+start()
