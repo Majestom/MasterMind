@@ -61,26 +61,86 @@ def validate_user_input(input_string):
                 return "Invalid!"
     return input_string
 
+# # Assigns answer pegs for user's guess.
+# def check_decoding_board_against_user_guess(decoding_board, current_user_board):
+#     black_answer_list = []
+#     white_answer_list = []
+#     position_of_colours_found = []
+#     i=0
+#     # Assign the black pegs.
+#     for i in range(len(decoding_board)):
+#         if decoding_board[i] == current_user_board[-1][i]:
+#             black_answer_list.append("black")
+#             position_of_colours_found.append(i)
+#     j=0
+#     k=0
+#     # Assign the white pegs.
+#     for j in range(len(decoding_board)):
+#         for k in range(len(current_user_board[-1])):
+#             if decoding_board[j] == current_user_board[-1][k] and k != j and j not in position_of_colours_found and k not in position_of_colours_found:
+#                 white_answer_list.append("white")
+#                 position_of_colours_found.append(j)
+#                 position_of_colours_found.append(k)
+#     return black_answer_list, white_answer_list
+
 # Assigns answer pegs for user's guess.
-def check_decoding_board_against_user_guess(decoding_board, current_user_board):
+def check_decoding_board_against_user_guess(a_decoding_board, a_current_user_board):
     black_answer_list = []
     white_answer_list = []
-    position_of_colours_found = []
+
+    new_a_decoding_board = []
+    new_a_current_user_board = []
+
     i=0
-    # Assign the black pegs.
-    for i in range(len(decoding_board)):
-        if decoding_board[i] == current_user_board[-1][i]:
+    # Assign black pegs.
+    for i in range(len(a_decoding_board)):
+        if a_decoding_board[i] == a_current_user_board[-1][i]:
             black_answer_list.append("black")
-            position_of_colours_found.append(i)
+        else:
+            new_a_decoding_board.append(a_decoding_board[i])
+            new_a_current_user_board.append(a_current_user_board[-1][i])
+
+    # Assign white pegs.
     j=0
     k=0
-    # Assign the white pegs.
-    for j in range(len(decoding_board)):
-        for k in range(len(current_user_board[-1])):
-            if decoding_board[j] == current_user_board[-1][k] and k != j and j not in position_of_colours_found and k not in position_of_colours_found:
-                white_answer_list.append("white")
-                position_of_colours_found.append(j)
-                position_of_colours_found.append(k)
+    decoding_board_dict = dict()
+    current_user_board_dict = dict()
+
+    for e in new_a_decoding_board:
+        decoding_board_dict[e] = 0
+    for e in new_a_decoding_board:
+        decoding_board_dict[e] = decoding_board_dict[e] + 1
+
+    print(decoding_board_dict)
+
+    for e in new_a_current_user_board:
+        current_user_board_dict[e] = 0
+    for e in new_a_current_user_board:
+        current_user_board_dict[e] = current_user_board_dict[e] + 1
+
+    print(current_user_board_dict)
+
+    for key in decoding_board_dict:
+        if key in current_user_board_dict:
+            if decoding_board_dict[key] == current_user_board_dict[key]:
+                i=0
+                for i in range(decoding_board_dict[key]):
+                    white_answer_list.append("white")
+            elif decoding_board_dict[key] > current_user_board_dict[key]:
+                i=0
+                for i in range(current_user_board_dict[key]):
+                    white_answer_list.append("white")
+            elif decoding_board_dict[key] < current_user_board_dict[key]:
+                i=0
+                for i in range(decoding_board_dict[key]):
+                    white_answer_list.append("white")
+
+    # # Assign white pegs.
+    # for j in range(len(new_a_decoding_board)):
+    #     for k in range(len(new_a_current_user_board)):
+    #         if new_a_decoding_board[j] == new_a_current_user_board[k]:
+    #             white_answer_list.append("white")
+
     return black_answer_list, white_answer_list
 
 def offer_hint(decoding_board_content):
