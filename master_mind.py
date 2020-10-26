@@ -3,6 +3,10 @@ from random import choice
 # Dictionary containing all colours associated with letters. Gray is c for charcoal.
 colours = {"r":"Red","y":"Yellow","b":"Blue","g":"Green","c":"Gray","p":"Purple","o":"Orange","w":"White"}
 
+# Dictionary containing ANSI escape sequences for various colours.
+ansi_colours = {"r":"\033[91m","y":"\033[93m","b":"\033[34m","g":"\033[1;32m",\
+"c":"\033[30m","p":"\033[35m","o":"\033[33m","w":"\033[37m"}
+
 # Returns a random sub-set of five colours.
 def generate_decoding_board_content():
     decoding_board_content = []
@@ -33,7 +37,8 @@ def add_to_user_board(user_board, input_string):
 # Prints user board.
 def display_user_board(a_user_board):
     for e in a_user_board:
-        print(e)
+        # print(e)
+        colour_print(e)
 
 # Asks user for input.
 def request_user_input():
@@ -117,6 +122,12 @@ def offer_hint(decoding_board_content):
 
 def colour_print(a_string):
     new_string = ""
+    for c in a_string:
+        if c in ansi_colours:
+            new_string = new_string + ansi_colours[c] + c + "\033[00m"
+        else:
+            new_string = new_string + c
+    print(new_string)
 
 def start():
     decoding_board_content = generate_decoding_board_content()
@@ -130,7 +141,7 @@ def start():
             break
         if user_input == "h":
             offer_hint(decoding_board_content)
-            validated_user_input = "Invalid!"
+            validated_user_input = "Invalid!" # This means the layer skips a go.
         else:
             validated_user_input = validate_user_input(user_input)
         if validated_user_input != "Invalid!":

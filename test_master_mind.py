@@ -89,3 +89,8 @@ def test_check_decoding_board_against_user_guess_10():
     a_decoding_board = ["r","r","o","o","o"]
     a_current_user_board = [["w","w","w","r","r"]]
     assert check_decoding_board_against_user_guess(a_decoding_board, a_current_user_board) == ([],["white","white"])
+
+def test_colour_print(capsys):
+    colour_print("r")
+    output = capsys.readouterr()
+    assert output.out == "\033[91mr\033[00m\n"
