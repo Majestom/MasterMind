@@ -111,8 +111,12 @@ def check_decoding_board_against_user_guess(a_decoding_board, a_current_user_boa
 
     return black_answer_list, white_answer_list
 
+# By pressing "h" key the user can view the decoding board.
 def offer_hint(decoding_board_content):
     print("Hint: " + str(decoding_board_content))
+
+def colour_print(a_string):
+    new_string = ""
 
 def start():
     decoding_board_content = generate_decoding_board_content()
@@ -126,7 +130,9 @@ def start():
             break
         if user_input == "h":
             offer_hint(decoding_board_content)
-        validated_user_input = validate_user_input(user_input)
+            validated_user_input = "Invalid!"
+        else:
+            validated_user_input = validate_user_input(user_input)
         if validated_user_input != "Invalid!":
             current_user_board = add_to_user_board(current_user_board, validated_user_input)
             black_answer_list, white_answer_list = check_decoding_board_against_user_guess(decoding_board_content, current_user_board)
@@ -138,6 +144,5 @@ def start():
             print(white_answer_list)
         else:
             pass
-
 
 start()
