@@ -19,10 +19,12 @@ def test_add_to_user_board():
 def test_display_user_board(capsys):
     assert type(display_user_board([["r","r","r","r","r"]])) is type(None)
     output = capsys.readouterr()
-    assert output.out == "['r', 'r', 'r', 'r', 'r']\n"
+    # assert output.out == "\x1b[91mr\x1b[00m\x1b[91mr\x1b[00m\n\x1b[91mr\x1b[00m\n\x1b[91mr\x1b[00m\n\x1b[91mr\x1b[00m\n"
+    assert output.out == "\x1b[91mr\x1b[00m\x1b[91mr\x1b[00m\x1b[91mr\x1b[00m\x1b[91mr\x1b[00m\x1b[91mr\x1b[00m\n"
+    # "\x1b[91mr\x1b[00m\x1b[91mr\x1b[00m\x1b[91mr\x1b[00m\x1b[91mr\x1b[00m\x1b[91mr\x1b[00m\n"
     display_user_board([["r","r","r","r","r"],["y","y","y","y","y"]])
     output = capsys.readouterr()
-    assert output.out == "['r', 'r', 'r', 'r', 'r']\n['y', 'y', 'y', 'y', 'y']\n"
+    assert output.out == "\x1b[91mr\x1b[00m\x1b[91mr\x1b[00m\x1b[91mr\x1b[00m\x1b[91mr\x1b[00m\x1b[91mr\x1b[00m\n\x1b[93my\x1b[00m\x1b[93my\x1b[00m\x1b[93my\x1b[00m\x1b[93my\x1b[00m\x1b[93my\x1b[00m\n"
 
 # def test_request_user_input(capsys):
 #     request_user_input()
@@ -32,11 +34,8 @@ def test_display_user_board(capsys):
 def test_validate_user_input(capsys):
     assert validate_user_input("r") == "Invalid!"
     output = capsys.readouterr()
-    assert output.out == "You need to enter 5 distinct elements separated by spaces, not 1.\n"
-    assert validate_user_input("ww w w w w") == "Invalid!"
-    output = capsys.readouterr()
-    assert output.out == "Input needs to be 9 characters long, not 10.\n"
-    assert validate_user_input("z z z z z") == "Invalid!"
+    assert output.out == "You need to enter 5 distinct letters, not 1.\n"
+    assert validate_user_input("zzzzz") == "Invalid!"
     output = capsys.readouterr()
     assert output.out == "z is not in set dict_keys(['r', 'y', 'b', 'g', 'c', 'p', 'o', 'w']).\n"
 

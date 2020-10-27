@@ -27,7 +27,7 @@ def create_user_board():
 
 # Adds a suitably formatted input string to the user_board.
 def add_to_user_board(user_board, input_string):
-    new_guess_row = input_string.split(" ")
+    new_guess_row = [char for char in input_string]
     if user_board == [["_","_","_","_","_"]]:
         user_board[0] = new_guess_row
     else:
@@ -37,7 +37,7 @@ def add_to_user_board(user_board, input_string):
 # Prints user board.
 def display_user_board(a_user_board):
     for e in a_user_board:
-        print(e)
+        # print(e)
         colour_print(e)
 
 # Asks user for input.
@@ -48,17 +48,15 @@ def request_user_input():
 
 # Checks that user input is valid.
 def validate_user_input(input_string):
-    new_guess_row = input_string.split(" ")
-
-    if len(new_guess_row) != 5:
-        print("You need to enter 5 distinct elements separated by spaces, not " + str(len(new_guess_row)) + ".")
+    if len(input_string) != 5:
+        print("You need to enter 5 distinct letters, not " + str(len(input_string)) + ".")
         return "Invalid!"
-    elif len(input_string) != 9:
-        print("Input needs to be 9 characters long, not " + str(len(input_string)) + ".")
-        return "Invalid!"
+    # elif len(input_string) != 9:
+    #     print("Input needs to be 9 characters long, not " + str(len(input_string)) + ".")
+    #     return "Invalid!"
     else:
         e = ""
-        for e in new_guess_row:
+        for e in input_string:
             if e not in colours.keys():
                 print(e + " is not in set " + str(colours.keys()) + ".")
                 return "Invalid!"
@@ -156,4 +154,4 @@ def start():
         else:
             pass
 
-# start()
+start()
