@@ -24,10 +24,10 @@ def test_display_user_board(capsys):
     output = capsys.readouterr()
     assert output.out == "['r', 'r', 'r', 'r', 'r']\n['y', 'y', 'y', 'y', 'y']\n"
 
-def test_request_user_input(capsys):
-    request_user_input()
-    output = capsys.readouterr()
-    assert output.out == "Please enter a guess:\n"
+# def test_request_user_input(capsys):
+#     request_user_input()
+#     output = capsys.readouterr()
+#     assert output.out == "Please enter a guess:\n"
 
 def test_validate_user_input(capsys):
     assert validate_user_input("r") == "Invalid!"

@@ -37,13 +37,14 @@ def add_to_user_board(user_board, input_string):
 # Prints user board.
 def display_user_board(a_user_board):
     for e in a_user_board:
-        # print(e)
+        print(e)
         colour_print(e)
 
 # Asks user for input.
 def request_user_input():
     print("Please enter a guess:")
-    return
+    guess = input().lower().replace(" ", "")
+    return guess
 
 # Checks that user input is valid.
 def validate_user_input(input_string):
@@ -135,8 +136,7 @@ def start():
     user_input = ""
     while user_input != "q":
         display_user_board(current_user_board)
-        request_user_input()
-        user_input = input()
+        user_input = request_user_input()
         if user_input == "q":
             break
         if user_input == "h":
@@ -156,4 +156,4 @@ def start():
         else:
             pass
 
-start()
+# start()
