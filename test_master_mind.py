@@ -1,6 +1,8 @@
 from master_mind import *
 import pytest
 
+
+
 def test_get_a_random_colour():
     assert type(get_a_random_colour()) is str
 
@@ -14,7 +16,7 @@ def test_create_user_board():
     assert len(create_user_board()[0]) == 5
 
 def test_add_to_user_board():
-    assert add_to_user_board([["r","r","r","r","r"]],"y y y y y") == [["r","r","r","r","r"],["y","y","y","y","y"]]
+    assert add_to_user_board([["r","r","r","r","r"]],"yyyyy") == [["r","r","r","r","r"],["y","y","y","y","y"]]
 
 def test_display_user_board(capsys):
     assert type(display_user_board([["r","r","r","r","r"]])) is type(None)
