@@ -96,3 +96,10 @@ def test_colour_print(capsys):
     colour_print("r")
     output = capsys.readouterr()
     assert output.out == "\033[91mr\033[00m"
+
+def test_add_black_and_white_pegs_to_user_board():
+    this_user_board = [[["r","c","w","r","o"],[]]]
+    these_black_pegs = ["black"]
+    these_white_pegs = ["white"]
+    updated_user_board = add_black_and_white_pegs_to_user_board(this_user_board, these_black_pegs, these_white_pegs)
+    assert updated_user_board == [[["r","c","w","r","o"],["black","white"]]]
