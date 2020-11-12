@@ -5,7 +5,7 @@ colours = {"r":"Red","y":"Yellow","b":"Blue","g":"Green","c":"Gray","p":"Purple"
 
 # Dictionary containing ANSI escape sequences for various colours.
 ansi_colours = {"r":"\033[91m","y":"\033[93m","b":"\033[34m","g":"\033[1;32m",\
-"c":"\033[30m","p":"\033[35m","o":"\033[33m","w":"\033[37m"}
+"c":"\033[1;90m\033[44m\033[30m","p":"\033[35m","o":"\033[33m","w":"\033[37m"}
 
 # Returns a random sub-set of five colours.
 def generate_decoding_board_content():
@@ -39,22 +39,22 @@ def add_to_user_board(user_board, input_string):
 # Prints user board.
 def display_user_board(a_user_board):
     # print(a_user_board)
-    print(a_user_board)
+    # print(a_user_board)
     for e in a_user_board:
         # print("e is " + str(e))
         for f in e[0]:
             # print("f is " + f)
             colour_print(f)
         # print("e[1][0]:" + str(e[1][0]))
-        print("e[1] is " + str(e[1]))
-
+        # print("e[1] is " + str(e[1]))
+        print(" ", end="")
         for f in e[1]:
-            print("f is " + f)
+            # print("f is " + f)
             if f == "black":
-                print(f)
+                # print(f)
                 colour_print("b")
             elif f == "white":
-                print(f)
+                # print(f)
                 colour_print("w")
         print("\n",end="")
 
@@ -140,7 +140,11 @@ def check_decoding_board_against_user_guess(a_decoding_board, a_current_user_boa
     return black_answer_list, white_answer_list
 
 def add_black_and_white_pegs_to_user_board(a_user_board, black_pegs_list, white_pegs_list):
-    pass
+    for b in black_pegs_list:
+        a_user_board[-1][1].append("black")
+    for w in white_pegs_list:
+        a_user_board[-1][1].append("white")
+    return a_user_board
 
 
 # By pressing "h" key the user can view the decoding board.
@@ -178,13 +182,13 @@ def start():
             current_user_board = add_to_user_board(current_user_board, validated_user_input)
             # print("In start(), current_user_board is " + str(current_user_board))
             black_answer_list, white_answer_list = check_decoding_board_against_user_guess(decoding_board_content, current_user_board)
-            # add_black_and_white_pegs_to_user_board(current_user_board, black_answer_list, white_answer_list)
-            if decoding_board_content == current_user_board[-1]:
+            current_user_board = add_black_and_white_pegs_to_user_board(current_user_board, black_answer_list, white_answer_list)
+            if decoding_board_content == current_user_board[-1][0]:
                 print(black_answer_list)
                 print("You win!")
                 break
-            print(black_answer_list)
-            print(white_answer_list)
+            # print(black_answer_list)
+            # print(white_answer_list)
         else:
             pass
 
