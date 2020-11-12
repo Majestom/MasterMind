@@ -5,7 +5,11 @@ colours = {"r":"Red","y":"Yellow","b":"Blue","g":"Green","c":"Gray","p":"Purple"
 
 # Dictionary containing ANSI escape sequences for various colours.
 ansi_colours = {"r":"\033[91m","y":"\033[93m","b":"\033[34m","g":"\033[1;32m",\
-"c":"\033[1;90m\033[44m\033[30m","p":"\033[35m","o":"\033[33m","w":"\033[37m"}
+"c":"\033[30m","p":"\033[35m","o":"\033[33m","w":"\033[37m"}
+
+# # Dictionary containing ANSI escape sequences for various colours. Black is bold with blue background.
+# ansi_colours = {"r":"\033[91m","y":"\033[93m","b":"\033[34m","g":"\033[1;32m",\
+# "c":"\033[1;90m\033[44m\033[30m","p":"\033[35m","o":"\033[33m","w":"\033[37m"}
 
 # Returns a random sub-set of five colours.
 def generate_decoding_board_content():
@@ -38,23 +42,14 @@ def add_to_user_board(user_board, input_string):
 
 # Prints user board.
 def display_user_board(a_user_board):
-    # print(a_user_board)
-    # print(a_user_board)
     for e in a_user_board:
-        # print("e is " + str(e))
         for f in e[0]:
-            # print("f is " + f)
             colour_print(f)
-        # print("e[1][0]:" + str(e[1][0]))
-        # print("e[1] is " + str(e[1]))
         print(" ", end="")
         for f in e[1]:
-            # print("f is " + f)
             if f == "black":
-                # print(f)
                 colour_print("b")
             elif f == "white":
-                # print(f)
                 colour_print("w")
         print("\n",end="")
 
@@ -69,9 +64,6 @@ def validate_user_input(input_string):
     if len(input_string) != 5:
         print("You need to enter 5 distinct letters, not " + str(len(input_string)) + ".")
         return "Invalid!"
-    # elif len(input_string) != 9:
-    #     print("Input needs to be 9 characters long, not " + str(len(input_string)) + ".")
-    #     return "Invalid!"
     else:
         e = ""
         for e in input_string:
@@ -93,13 +85,7 @@ def check_decoding_board_against_user_guess(a_decoding_board, a_current_user_boa
 
     i=0
     # Assign black pegs.
-    # print("The length of a_decoding_board is " + str(len(a_decoding_board)))
-    # print("The length of a_current_user_board is " + str(len(a_current_user_board[-1][0][0])))
-    # print("a_current_user_board is " + str(a_current_user_board))
     for i in range(len(a_decoding_board)):
-        # print(a_decoding_board[i])
-        # print("The length of a_current_user_board[-1][0][i] is " + str(len(a_current_user_board[-1][0][i])))
-        # print("Current letter is " + str(a_current_user_board[-1][0][i]))
         if a_decoding_board[i] == a_current_user_board[-1][0][i]:
             black_answer_list.append("black")
         else:
@@ -159,12 +145,10 @@ def colour_print(a_string):
         else:
             new_string = new_string + c
     print(new_string, end="")
-    # print("\n")
 
 def start():
     decoding_board_content = generate_decoding_board_content()
     current_user_board = create_user_board()
-    print("Outside while in start(), current_user_board is " + str(current_user_board))
     user_input = ""
     black_answer_list = []
     white_answer_list = []
@@ -180,15 +164,13 @@ def start():
             validated_user_input = validate_user_input(user_input)
         if validated_user_input != "Invalid!":
             current_user_board = add_to_user_board(current_user_board, validated_user_input)
-            # print("In start(), current_user_board is " + str(current_user_board))
             black_answer_list, white_answer_list = check_decoding_board_against_user_guess(decoding_board_content, current_user_board)
             current_user_board = add_black_and_white_pegs_to_user_board(current_user_board, black_answer_list, white_answer_list)
             if decoding_board_content == current_user_board[-1][0]:
-                print(black_answer_list)
+                # print(black_answer_list)
+                display_user_board(current_user_board)
                 print("You win!")
                 break
-            # print(black_answer_list)
-            # print(white_answer_list)
         else:
             pass
 
