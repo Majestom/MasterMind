@@ -20,14 +20,13 @@ def test_add_to_user_board():
 def test_display_user_board(capsys):
     assert type(display_user_board([[["r","r","r","r","r"],[]]])) is type(None)
     output = capsys.readouterr()
-    assert output.out == "\x1b[91mr\x1b[00m\x1b[91mr\x1b[00m\x1b[91mr\x1b[00m\x1b[91mr\x1b[00m\x1b[91mr\x1b[00m\n"
+    assert output.out == "\x1b[91mr\x1b[00m\x1b[91mr\x1b[00m\x1b[91mr\x1b[00m\x1b[91mr\x1b[00m\x1b[91mr\x1b[00m \n"
     display_user_board([[["r","r","r","r","r"],[]],[["y","y","y","y","y"],[]]])
     output = capsys.readouterr()
-    assert output.out == "\x1b[91mr\x1b[00m\x1b[91mr\x1b[00m\x1b[91mr\x1b[00m\x1b[91mr\x1b[00m\x1b[91mr\x1b[00m\n\x1b[93my\x1b[00m\x1b[93my\x1b[00m\x1b[93my\x1b[00m\x1b[93my\x1b[00m\x1b[93my\x1b[00m\n"
+    assert output.out == "\x1b[91mr\x1b[00m\x1b[91mr\x1b[00m\x1b[91mr\x1b[00m\x1b[91mr\x1b[00m\x1b[91mr\x1b[00m \n\x1b[93my\x1b[00m\x1b[93my\x1b[00m\x1b[93my\x1b[00m\x1b[93my\x1b[00m\x1b[93my\x1b[00m \n"
     display_user_board([[["r","r","r","r","r"],["black","white"]]])
     output = capsys.readouterr()
-    assert output.out == "\x1b[91mr\x1b[00m\x1b[91mr\x1b[00m\x1b[91mr\x1b[00m\x1b[91mr\x1b[00m\x1b[91mr\x1b[00m\n"
-    # assert output.out == "\x1b[91mr\x1b[00m\x1b[91mr\x1b[00m\x1b[91mr\x1b[00m\x1b[91mr\x1b[00m\x1b[91mr\x1b[00m\033[34mb\x1b[00m\033[37mb\x1w[00m\n"
+    assert output.out == "\x1b[91mr\x1b[00m\x1b[91mr\x1b[00m\x1b[91mr\x1b[00m\x1b[91mr\x1b[00m\x1b[91mr\x1b[00m \033[34mb\x1b[00m\033[37mw\x1b[00m\n"
 
 # def test_request_user_input(capsys):
 #     request_user_input()
