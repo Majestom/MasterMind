@@ -1,6 +1,6 @@
 from master_mind import *
 import pytest
-from unittest import mock
+# from unittest import mock
 
 def test_get_a_random_colour():
     assert type(get_a_random_colour()) is str
