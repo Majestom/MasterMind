@@ -29,12 +29,12 @@ def test_display_user_board(capsys):
     output = capsys.readouterr()
     assert output.out == "\x1b[91mr\x1b[00m\x1b[91mr\x1b[00m\x1b[91mr\x1b[00m\x1b[91mr\x1b[00m\x1b[91mr\x1b[00m \033[34mb\x1b[00m\033[37mw\x1b[00m\n"
 
-def test_request_user_input(capsys):
-    with mock.patch.object("builtins.input", lambda _ : "rrrrr"):
-        assert request_user_input() == "rrrrr"
-    # request_user_input()
-    # output = capsys.readouterr()
-    # assert output.out == "Please enter a guess:\n"
+# def test_request_user_input(capsys):
+#     with mock.patch.object("builtins.input", lambda _ : "rrrrr"):
+#         assert request_user_input() == "rrrrr"
+#     # request_user_input()
+#     # output = capsys.readouterr()
+#     # assert output.out == "Please enter a guess:\n"
 
 def test_validate_user_input(capsys):
     assert validate_user_input("r") == "Invalid!"
