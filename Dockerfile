@@ -6,9 +6,9 @@ COPY ./requirements.txt /master_mind_project/
 COPY ./master_mind.py /master_mind_project/
 COPY ./test_master_mind.py /master_mind_project/
 
-RUN pip install --upgrade pip
-RUN pip install -e
-RUN pip3 INSTALL -r /master_mind_project/requirements.txt
+#RUN pip install --upgrade pip
+#RUN pip install -e .
+RUN pip3 install -r /master_mind_project/requirements.txt
 
 WORKDIR /master_mind_project/
 
